@@ -29,7 +29,8 @@ export const createRental = async (req, res) => {
 export const UpdateRental = async (req, res) => {
     try {
         const { nama_penyewa, tipe_mobil, durasi_sewa, harga } = req.body;
-        await Rental.update({ nama_penyewa, tipe_mobil, durasi_sewa, harga }, {
+        const total_harga = durasi_sewa * harga; // Hitung ulang total harga
+        await Rental.update({ nama_penyewa, tipe_mobil, durasi_sewa, harga, total_harga }, {
             where: {
                 id: req.params.id
             }
